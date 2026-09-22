@@ -16,19 +16,19 @@ module.exports = ({ resultados, trecho }) => {
   const versao = resultados.versao.split('-')[0];
 
   const capa = {
-    instituicao: '==[NOME DA INSTITUIÇÃO]==',
-    curso: '==[NOME DO CURSO]==',
+    instituicao: 'FACULDADE INSTED',
+    curso: 'ANÁLISE E DESENVOLVIMENTO DE SISTEMAS',
     autores: [
-      '==[NOME COMPLETO DO INTEGRANTE 1]==',
-      '==[NOME COMPLETO DO INTEGRANTE 2]==',
-      '==[NOME COMPLETO DO INTEGRANTE 3]==',
-      '==[NOME COMPLETO DO INTEGRANTE 4]==',
+      'JOÃO VICTOR MULLER MIRANDA',
+      'JULIANO DOS SANTOS APOLINARIO ARAUJO',
+      'JÚLIO CÉSAR ZADI DE ASSIS DOS SANTOS',
+      'LUAN FLORES MARTINS',
     ],
     titulo: 'BANCO DE DADOS DE UMA CONCESSIONÁRIA DE VEÍCULOS: modelagem e implementação em PostgreSQL',
     tituloSimples: 'Banco de dados de uma concessionária de veículos',
-    natureza: 'Trabalho apresentado à disciplina de ==[NOME DA DISCIPLINA]== do curso de ==[NOME DO CURSO]== da ==[NOME DA INSTITUIÇÃO]==, como requisito parcial para avaliação.',
+    natureza: 'Trabalho apresentado à disciplina de Laboratório de Banco de Dados do curso de Análise e Desenvolvimento de Sistemas da Faculdade Insted, como requisito parcial para avaliação.',
     professor: 'Professor: Odirley Franco',
-    cidade: '==[CIDADE]==',
+    cidade: 'CAMPO GRANDE',
     ano: '2026',
   };
 

@@ -1,7 +1,8 @@
 # Trabalho de Banco de Dados: Concessionária de Veículos
 
 Implementação básica do banco de dados de uma concessionária em **PostgreSQL 16**,
-seguindo as orientações do professor Odirley Franco (entrega em 24/09, até as 19 h).
+para a disciplina de Laboratório de Banco de Dados da Faculdade Insted, seguindo as
+orientações do professor Odirley Franco (entrega em 24/09, até as 19 h).
 
 | Arquivo | O que é |
 |---|---|
@@ -31,15 +32,18 @@ apresentador; dá para baixar em PowerPoint ou PDF pelo próprio deck).
 | Comandos utilizados | Seção 5 inteira, Quadro 19 (resumo) e Apêndices A e B (scripts completos) |
 | Conclusão e referências | Seção 6 e Referências |
 
-## Antes de entregar: preencher os campos em amarelo
+## Dados da capa
 
-A capa, a folha de rosto e o primeiro slide têm campos que só o grupo sabe:
-
-- `[NOME DA INSTITUIÇÃO]`, `[NOME DO CURSO]`, `[NOME DA DISCIPLINA]` e `[CIDADE]`;
-- `[NOME COMPLETO DO INTEGRANTE 1]` a `4` (se o grupo tiver menos de 4, apague as linhas que sobrarem).
-
-No `.docx` eles estão com **fundo amarelo**. Depois de preencher, selecione o
-texto e tire o realce. Trocar esses campos não muda a paginação.
+- **Instituição:** Faculdade Insted
+- **Curso:** Análise e Desenvolvimento de Sistemas
+- **Disciplina:** Laboratório de Banco de Dados
+- **Professor:** Odirley Franco
+- **Integrantes:**
+  - João Victor Muller Miranda
+  - Juliano dos Santos Apolinario Araujo
+  - Júlio César Zadi de Assis dos Santos
+  - Luan Flores Martins
+- **Local e ano:** Campo Grande, 2026
 
 O sumário e as listas de figuras, quadros e códigos já vêm com os números de
 página preenchidos. Se o grupo mudar o texto a ponto de empurrar páginas,
