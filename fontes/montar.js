@@ -20,7 +20,8 @@ const AQUI = __dirname;
 const RAIZ = path.join(AQUI, '..');
 const SAIDA = path.join(RAIZ, 'Documentacao_Concessionaria_ABNT.docx');
 const resultados = JSON.parse(fs.readFileSync(path.join(AQUI, 'resultados.json'), 'utf8'));
-const SCRIPT = fs.readFileSync(path.join(RAIZ, 'script_concessionaria.sql'), 'utf8');
+const SCRIPT = ['01_criar_banco.sql', '02_tabelas_e_carga.sql']
+  .map((f) => fs.readFileSync(path.join(RAIZ, f), 'utf8')).join('\n\n');
 const ARQ_PAGINAS = path.join(AQUI, 'paginas.json');
 const paginas = fs.existsSync(ARQ_PAGINAS)
   ? JSON.parse(fs.readFileSync(ARQ_PAGINAS, 'utf8')) : {};
@@ -176,7 +177,7 @@ function legendaFonte(texto) {
   });
 }
 const FONTE_AUTORES = 'Fonte: Elaborado pelos autores (2026).';
-const FONTE_EXECUCAO = `Fonte: Elaborado pelos autores, a partir da execução no MySQL ${resultados.versao.split('-')[0]} (2026).`;
+const FONTE_EXECUCAO = `Fonte: Elaborado pelos autores, a partir da execução no PostgreSQL ${resultados.versao} (2026).`;
 const textoDaFonte = (b) => (b.fonteTexto === 'execucao' ? FONTE_EXECUCAO
   : b.fonteTexto || FONTE_AUTORES);
 
@@ -223,7 +224,8 @@ const PALAVRAS = new Set(('SELECT FROM WHERE INSERT INTO VALUES UPDATE SET DELET
   'TABLE DATABASE DROP IF EXISTS USE PRIMARY KEY FOREIGN REFERENCES CONSTRAINT UNIQUE ' +
   'CHECK DEFAULT NOT NULL AUTO_INCREMENT ENGINE CHARACTER COLLATE ON CASCADE RESTRICT ' +
   'START TRANSACTION COMMIT AS JOIN LEFT ORDER BY GROUP UNION ALL COUNT SUM COALESCE ' +
-  'CONCAT IN NAMES DESC AND OR INT VARCHAR DECIMAL YEAR DATE').split(' '));
+  'CONCAT IN NAMES DESC AND OR INT VARCHAR DECIMAL YEAR DATE BEGIN WITH ENCODING TEMPLATE ' +
+  'GENERATED ALWAYS IDENTITY SMALLINT NUMERIC BETWEEN CASE WHEN THEN END').split(' '));
 const COR = { palavra: '1F3A5F', texto: '8B2E16', comentario: '6B7280' };
 
 function linhaDeCodigo(linhaTexto, tamanho) {

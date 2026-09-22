@@ -91,30 +91,6 @@
    ]
   ]
  },
- "apos_insert_contagem": {
-  "colunas": [
-   "tabela",
-   "registros"
-  ],
-  "linhas": [
-   [
-    "fornecedores",
-    "3"
-   ],
-   [
-    "veiculos",
-    "7"
-   ],
-   [
-    "clientes",
-    "4"
-   ],
-   [
-    "funcionarios",
-    "3"
-   ]
-  ]
- },
  "antes_update": {
   "colunas": [
    "item",
@@ -179,58 +155,6 @@
    ]
   ]
  },
- "apos_vendas_status": {
-  "colunas": [
-   "id",
-   "marca",
-   "modelo",
-   "status"
-  ],
-  "linhas": [
-   [
-    "1",
-    "Volkswagen",
-    "Gol",
-    "Vendido"
-   ],
-   [
-    "2",
-    "Chevrolet",
-    "Onix",
-    "Disponivel"
-   ],
-   [
-    "3",
-    "Fiat",
-    "Toro",
-    "Disponivel"
-   ],
-   [
-    "4",
-    "Toyota",
-    "Corolla",
-    "Vendido"
-   ],
-   [
-    "5",
-    "Hyundai",
-    "HB20",
-    "Vendido"
-   ],
-   [
-    "6",
-    "Jeep",
-    "Compass",
-    "Disponivel"
-   ],
-   [
-    "7",
-    "Renault",
-    "Kwid",
-    "Disponivel"
-   ]
-  ]
- },
  "depois_update": {
   "colunas": [
    "item",
@@ -268,7 +192,7 @@
   "linhas": [
    [
     "clientes",
-    "PRIMARY",
+    "clientes_pkey",
     "PRIMARY KEY"
    ],
    [
@@ -278,7 +202,7 @@
    ],
    [
     "fornecedores",
-    "PRIMARY",
+    "fornecedores_pkey",
     "PRIMARY KEY"
    ],
    [
@@ -293,8 +217,13 @@
    ],
    [
     "funcionarios",
-    "PRIMARY",
+    "funcionarios_pkey",
     "PRIMARY KEY"
+   ],
+   [
+    "veiculos",
+    "ck_veiculo_ano",
+    "CHECK"
    ],
    [
     "veiculos",
@@ -313,7 +242,7 @@
    ],
    [
     "veiculos",
-    "PRIMARY",
+    "veiculos_pkey",
     "PRIMARY KEY"
    ],
    [
@@ -343,7 +272,7 @@
    ],
    [
     "vendas",
-    "PRIMARY",
+    "vendas_pkey",
     "PRIMARY KEY"
    ],
    [
@@ -481,8 +410,8 @@
    ]
   ]
  },
- "teste_fk": "ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`concessionaria_db`.`vendas`, CONSTRAINT `fk_venda_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE)",
- "teste_unique": "ERROR 1062 (23000): Duplicate entry '1' for key 'vendas.uq_venda_veiculo'",
- "teste_check": "ERROR 3819 (HY000): Check constraint 'ck_veiculo_status' is violated.",
- "versao": "8.0.46-0ubuntu0.24.04.4"
+ "teste_fk": "ERROR:  update or delete on table \"clientes\" violates foreign key constraint \"fk_venda_cliente\" on table \"vendas\"\nDETAIL:  Key (id)=(1) is still referenced from table \"vendas\".",
+ "teste_unique": "ERROR:  duplicate key value violates unique constraint \"uq_venda_veiculo\"\nDETAIL:  Key (veiculo_id)=(1) already exists.",
+ "teste_check": "ERROR:  new row for relation \"veiculos\" violates check constraint \"ck_veiculo_status\"\nDETAIL:  Failing row contains (6, Jeep, Compass, 2025, Branco, PQR6I78, 189900.00, Vendida, 3).",
+ "versao": "16.13"
 }

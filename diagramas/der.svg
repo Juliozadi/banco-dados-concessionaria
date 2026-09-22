@@ -63,7 +63,7 @@
 <rect x="561.2" y="228.0" width="397.6" height="36" fill="#F3F6F9"/>
 <line x1="560.0" y1="228.0" x2="960.0" y2="228.0" stroke="#DCE3EA" stroke-width="1"/>
 <text x="658.0" y="246.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="19" font-weight="normal" fill="#1F2A37" text-anchor="start" dominant-baseline="central">ano</text>
-<text x="946.0" y="246.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">YEAR</text>
+<text x="946.0" y="246.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">SMALLINT</text>
 <line x1="560.0" y1="264.0" x2="960.0" y2="264.0" stroke="#DCE3EA" stroke-width="1"/>
 <text x="658.0" y="282.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="19" font-weight="normal" fill="#1F2A37" text-anchor="start" dominant-baseline="central">cor</text>
 <text x="946.0" y="282.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">VARCHAR(30)</text>
@@ -75,7 +75,7 @@
 <text x="946.0" y="318.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">VARCHAR(8)</text>
 <line x1="560.0" y1="336.0" x2="960.0" y2="336.0" stroke="#DCE3EA" stroke-width="1"/>
 <text x="658.0" y="354.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="19" font-weight="normal" fill="#1F2A37" text-anchor="start" dominant-baseline="central">preco</text>
-<text x="946.0" y="354.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">DECIMAL(10,2)</text>
+<text x="946.0" y="354.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">NUMERIC(10,2)</text>
 <rect x="561.2" y="372.0" width="397.6" height="36" fill="#F3F6F9"/>
 <line x1="560.0" y1="372.0" x2="960.0" y2="372.0" stroke="#DCE3EA" stroke-width="1"/>
 <text x="658.0" y="390.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="19" font-weight="normal" fill="#1F2A37" text-anchor="start" dominant-baseline="central">status</text>
@@ -144,7 +144,7 @@
 <rect x="561.2" y="790.0" width="397.6" height="36" fill="#F3F6F9"/>
 <line x1="560.0" y1="790.0" x2="960.0" y2="790.0" stroke="#DCE3EA" stroke-width="1"/>
 <text x="658.0" y="808.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="19" font-weight="normal" fill="#1F2A37" text-anchor="start" dominant-baseline="central">valor_venda</text>
-<text x="946.0" y="808.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">DECIMAL(10,2)</text>
+<text x="946.0" y="808.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">NUMERIC(10,2)</text>
 <rect x="1060" y="560" width="400" height="230" rx="6" fill="#FFFFFF" stroke="#1F3A5F" stroke-width="2.4"/>
 <path d="M1060,610 v-44 a6,6 0 0 1 6,-6 h388 a6,6 0 0 1 6,6 v44 z" fill="#1F3A5F"/>
 <text x="1260.0" y="585.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">funcionarios</text>
@@ -162,7 +162,7 @@
 <rect x="1061.2" y="718.0" width="397.6" height="36" fill="#F3F6F9"/>
 <line x1="1060.0" y1="718.0" x2="1460.0" y2="718.0" stroke="#DCE3EA" stroke-width="1"/>
 <text x="1158.0" y="736.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="19" font-weight="normal" fill="#1F2A37" text-anchor="start" dominant-baseline="central">salario</text>
-<text x="1446.0" y="736.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">DECIMAL(10,2)</text>
+<text x="1446.0" y="736.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">NUMERIC(10,2)</text>
 <line x1="1060.0" y1="754.0" x2="1460.0" y2="754.0" stroke="#DCE3EA" stroke-width="1"/>
 <text x="1158.0" y="772.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="19" font-weight="normal" fill="#1F2A37" text-anchor="start" dominant-baseline="central">telefone</text>
 <text x="1446.0" y="772.0" font-family="Arial, 'Liberation Sans', Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#5B6B7C" text-anchor="end" dominant-baseline="central">VARCHAR(15)</text>

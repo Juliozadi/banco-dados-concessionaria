@@ -1,27 +1,12 @@
 -- =============================================================
 -- BANCO DE DADOS DE UMA CONCESSIONÁRIA DE VEÍCULOS
--- SGBD: MySQL 8.0 (motor de armazenamento InnoDB)
+-- SGBD: PostgreSQL 16
 --
--- Execute o arquivo inteiro, de cima para baixo:
---   MySQL Workbench: abrir o arquivo e usar Ctrl+Shift+Enter
---   Terminal:        mysql -u root -p < script_concessionaria.sql
+-- ARQUIVO 2 DE 2: ESTRUTURA DE TABELAS E CARGA DE DADOS
+-- Execute conectado ao banco concessionaria_db:
+--   pgAdmin:  Query Tool no banco concessionaria_db, F5
+--   Terminal: psql -U postgres -d concessionaria_db -f 02_tabelas_e_carga.sql
 -- =============================================================
-
-SET NAMES utf8mb4;
-
--- -------------------------------------------------------------
--- 1) CRIAÇÃO DO BANCO DE DADOS
--- -------------------------------------------------------------
-
--- Apaga uma versão anterior para que o script possa ser executado
--- novamente sem erro
-DROP DATABASE IF EXISTS concessionaria_db;
-
-CREATE DATABASE concessionaria_db
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
-
-USE concessionaria_db;
 
 -- -------------------------------------------------------------
 -- 2) CRIAÇÃO DA ESTRUTURA DE TABELAS (DDL)
@@ -30,24 +15,25 @@ USE concessionaria_db;
 -- -------------------------------------------------------------
 
 CREATE TABLE fornecedores (
-    id       INT          AUTO_INCREMENT PRIMARY KEY,
+    id       INT          GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome     VARCHAR(100) NOT NULL,
     cnpj     VARCHAR(18)  NOT NULL,
     telefone VARCHAR(15),
     CONSTRAINT uq_fornecedor_cnpj UNIQUE (cnpj)
-) ENGINE = InnoDB;
+);
 
 CREATE TABLE veiculos (
-    id            INT           AUTO_INCREMENT PRIMARY KEY,
+    id            INT           GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     marca         VARCHAR(50)   NOT NULL,
     modelo        VARCHAR(50)   NOT NULL,
-    ano           YEAR          NOT NULL,
+    ano           SMALLINT      NOT NULL,
     cor           VARCHAR(30),
     placa         VARCHAR(8),
-    preco         DECIMAL(10,2) NOT NULL,
+    preco         NUMERIC(10,2) NOT NULL,
     status        VARCHAR(20)   NOT NULL DEFAULT 'Disponivel',
     fornecedor_id INT,
     CONSTRAINT uq_veiculo_placa UNIQUE (placa),
+    CONSTRAINT ck_veiculo_ano CHECK (ano BETWEEN 1900 AND 2100),
     CONSTRAINT ck_veiculo_preco CHECK (preco > 0),
     CONSTRAINT ck_veiculo_status
         CHECK (status IN ('Disponivel', 'Reservado', 'Vendido')),
@@ -55,34 +41,34 @@ CREATE TABLE veiculos (
         FOREIGN KEY (fornecedor_id) REFERENCES fornecedores (id)
         ON DELETE SET NULL
         ON UPDATE CASCADE
-) ENGINE = InnoDB;
+);
 
 CREATE TABLE clientes (
-    id       INT          AUTO_INCREMENT PRIMARY KEY,
+    id       INT          GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome     VARCHAR(100) NOT NULL,
     cpf      VARCHAR(14)  NOT NULL,
     telefone VARCHAR(15),
     email    VARCHAR(100),
     endereco VARCHAR(150),
     CONSTRAINT uq_cliente_cpf UNIQUE (cpf)
-) ENGINE = InnoDB;
+);
 
 CREATE TABLE funcionarios (
-    id       INT           AUTO_INCREMENT PRIMARY KEY,
+    id       INT           GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome     VARCHAR(100)  NOT NULL,
     cargo    VARCHAR(50)   NOT NULL,
-    salario  DECIMAL(10,2) NOT NULL,
+    salario  NUMERIC(10,2) NOT NULL,
     telefone VARCHAR(15),
     CONSTRAINT ck_funcionario_salario CHECK (salario > 0)
-) ENGINE = InnoDB;
+);
 
 CREATE TABLE vendas (
-    id             INT           AUTO_INCREMENT PRIMARY KEY,
+    id             INT           GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     cliente_id     INT           NOT NULL,
     funcionario_id INT           NOT NULL,
     veiculo_id     INT           NOT NULL,
     data_venda     DATE          NOT NULL,
-    valor_venda    DECIMAL(10,2) NOT NULL,
+    valor_venda    NUMERIC(10,2) NOT NULL,
     CONSTRAINT uq_venda_veiculo UNIQUE (veiculo_id),
     CONSTRAINT ck_venda_valor CHECK (valor_venda > 0),
     CONSTRAINT fk_venda_cliente
@@ -94,7 +80,7 @@ CREATE TABLE vendas (
     CONSTRAINT fk_venda_veiculo
         FOREIGN KEY (veiculo_id) REFERENCES veiculos (id)
         ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB;
+);
 
 -- -------------------------------------------------------------
 -- 3) CARGA DE DADOS (DML)
@@ -140,21 +126,21 @@ INSERT INTO funcionarios (nome, cargo, salario, telefone) VALUES
 -- As duas operações ficam na mesma transação: ou as duas são
 -- gravadas, ou nenhuma é.
 
-START TRANSACTION;
+BEGIN;
 INSERT INTO vendas
     (cliente_id, funcionario_id, veiculo_id, data_venda, valor_venda)
 VALUES (1, 1, 1, '2026-09-15', 77500.00);
 UPDATE veiculos SET status = 'Vendido' WHERE id = 1;
 COMMIT;
 
-START TRANSACTION;
+BEGIN;
 INSERT INTO vendas
     (cliente_id, funcionario_id, veiculo_id, data_venda, valor_venda)
 VALUES (3, 3, 4, '2026-09-17', 142000.00);
 UPDATE veiculos SET status = 'Vendido' WHERE id = 4;
 COMMIT;
 
-START TRANSACTION;
+BEGIN;
 INSERT INTO vendas
     (cliente_id, funcionario_id, veiculo_id, data_venda, valor_venda)
 VALUES (4, 1, 5, '2026-09-19', 91500.00);
@@ -232,7 +218,7 @@ ORDER BY v.preco;
 
 -- Vendas com o nome do cliente, do funcionário e o veículo vendido
 SELECT vd.id, c.nome AS cliente, fu.nome AS funcionario,
-       CONCAT(ve.marca, ' ', ve.modelo) AS veiculo,
+       ve.marca || ' ' || ve.modelo AS veiculo,
        vd.data_venda, vd.valor_venda
 FROM vendas vd
 JOIN clientes c      ON c.id  = vd.cliente_id
@@ -243,7 +229,7 @@ ORDER BY vd.data_venda;
 -- Total vendido por funcionário
 SELECT fu.nome, fu.cargo,
        COUNT(vd.id) AS vendas,
-       COALESCE(SUM(vd.valor_venda), 0) AS total_vendido
+       COALESCE(SUM(vd.valor_venda), 0.00) AS total_vendido
 FROM funcionarios fu
 LEFT JOIN vendas vd ON vd.funcionario_id = fu.id
 GROUP BY fu.id, fu.nome, fu.cargo
