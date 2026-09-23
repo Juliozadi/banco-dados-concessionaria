@@ -91,6 +91,7 @@ resultados['restricoes'] = consulta("""SELECT conrelid::regclass AS tabela,
                     WHEN 'f' THEN 'FOREIGN KEY' END AS tipo
 FROM pg_constraint
 WHERE connamespace = 'public'::regnamespace
+  AND contype IN ('p', 'u', 'c', 'f')
 ORDER BY conrelid::regclass::text, tipo, conname;""")
 
 # As quatro consultas de verificação, exatamente como estão no script

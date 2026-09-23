@@ -1,6 +1,6 @@
 -- =============================================================
 -- BANCO DE DADOS DE UMA CONCESSIONÁRIA DE VEÍCULOS
--- SGBD: PostgreSQL 16
+-- SGBD: PostgreSQL 18 (compatível a partir da versão 10)
 --
 -- ARQUIVO 2 DE 2: ESTRUTURA DE TABELAS E CARGA DE DADOS
 -- Execute conectado ao banco concessionaria_db:

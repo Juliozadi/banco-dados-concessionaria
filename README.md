@@ -1,6 +1,6 @@
 # Trabalho de Banco de Dados: Concessionária de Veículos
 
-Implementação básica do banco de dados de uma concessionária em **PostgreSQL 16**,
+Implementação básica do banco de dados de uma concessionária em **PostgreSQL 18**,
 para a disciplina de Laboratório de Banco de Dados da Faculdade Insted, seguindo as
 orientações do professor Odirley Franco (entrega em 24/09, até as 19 h).
 
@@ -54,7 +54,7 @@ confira os números antes de entregar.
 O modelo do grupo foi mantido: as mesmas 5 tabelas e colunas, e todos os
 registros originais continuam nos scripts, com os mesmos ids. O que mudou:
 
-1. **SGBD trocado de MySQL para PostgreSQL 16**, com os ajustes de sintaxe:
+1. **SGBD trocado de MySQL para PostgreSQL**, com os ajustes de sintaxe:
    - `GENERATED ALWAYS AS IDENTITY` no lugar de `AUTO_INCREMENT`;
    - `NUMERIC` no lugar de `DECIMAL`;
    - `SMALLINT` com CHECK no lugar de `YEAR`, que não existe no PostgreSQL;
@@ -94,7 +94,8 @@ psql -U postgres -f 01_criar_banco.sql
 psql -U postgres -d concessionaria_db -f 02_tabelas_e_carga.sql
 ```
 
-Os scripts foram executados de ponta a ponta no PostgreSQL 16.13. A saída completa,
+Os scripts foram executados de ponta a ponta no PostgreSQL 16.13 e usam só recursos
+disponíveis desde a versão 10, então funcionam igual no PostgreSQL 18 do grupo. A saída completa,
 com cada comando e o resultado das consultas, está em `fontes/saida_execucao.txt`.
 
 ## Regerando a documentação

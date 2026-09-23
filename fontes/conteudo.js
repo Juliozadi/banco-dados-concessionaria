@@ -33,7 +33,7 @@ module.exports = ({ resultados, trecho }) => {
   };
 
   const resumo = {
-    texto: 'Este trabalho apresenta a implementação básica de um banco de dados relacional para um sistema de gestão de uma concessionária de veículos, que controla o cadastro de fornecedores, veículos, clientes e funcionários e o registro das vendas. Foi escolhido o Sistema Gerenciador de Banco de Dados (SGBD) PostgreSQL 16, por ser gratuito, de código aberto, aderente ao padrão SQL e oferecer transações, chaves estrangeiras e restrições de verificação. A modelagem foi desenvolvida em dois níveis: o Modelo Entidade-Relacionamento (MER), conceitual, e o Diagrama Entidade-Relacionamento (DER), lógico, complementados por um dicionário de dados. Em seguida, foram criados o banco de dados e a estrutura de cinco tabelas com comandos da linguagem de definição de dados, e realizada a carga de dados com os comandos INSERT, UPDATE e DELETE. Todos os comandos foram executados no PostgreSQL ' + versao + ', e testes de integridade confirmaram que o SGBD recusa operações que deixariam os dados inconsistentes, como vender duas vezes o mesmo veículo ou excluir um cliente que possui compras registradas.',
+    texto: 'Este trabalho apresenta a implementação básica de um banco de dados relacional para um sistema de gestão de uma concessionária de veículos, que controla o cadastro de fornecedores, veículos, clientes e funcionários e o registro das vendas. Foi escolhido o Sistema Gerenciador de Banco de Dados (SGBD) PostgreSQL 18, por ser gratuito, de código aberto, aderente ao padrão SQL e oferecer transações, chaves estrangeiras e restrições de verificação. A modelagem foi desenvolvida em dois níveis: o Modelo Entidade-Relacionamento (MER), conceitual, e o Diagrama Entidade-Relacionamento (DER), lógico, complementados por um dicionário de dados. Em seguida, foram criados o banco de dados e a estrutura de cinco tabelas com comandos da linguagem de definição de dados, e realizada a carga de dados com os comandos INSERT, UPDATE e DELETE. Todos os comandos foram executados no PostgreSQL ' + versao + ', e testes de integridade confirmaram que o SGBD recusa operações que deixariam os dados inconsistentes, como vender duas vezes o mesmo veículo ou excluir um cliente que possui compras registradas.',
     palavras: 'Banco de dados. PostgreSQL. Modelagem de dados. SQL. Concessionária de veículos.',
   };
 
@@ -88,7 +88,7 @@ module.exports = ({ resultados, trecho }) => {
 
     // ── 3 ────────────────────────────────────────────────────────────
     { t: 'h1', texto: 'Escolha do banco de dados' },
-    { t: 'p', texto: 'O SGBD escolhido foi o **PostgreSQL**, na versão 16. O PostgreSQL é um SGBD objeto-relacional de código aberto, desenvolvido por uma comunidade internacional, o PostgreSQL Global Development Group, e distribuído gratuitamente sob a licença PostgreSQL, semelhante às licenças BSD e MIT (THE POSTGRESQL GLOBAL DEVELOPMENT GROUP, 2026). A escolha considerou os seguintes critérios:' },
+    { t: 'p', texto: 'O SGBD escolhido foi o **PostgreSQL**, na versão 18. O PostgreSQL é um SGBD objeto-relacional de código aberto, desenvolvido por uma comunidade internacional, o PostgreSQL Global Development Group, e distribuído gratuitamente sob a licença PostgreSQL, semelhante às licenças BSD e MIT (THE POSTGRESQL GLOBAL DEVELOPMENT GROUP, 2026). A escolha considerou os seguintes critérios:' },
     { t: 'alineas', itens: [
       'custo e licença: é gratuito e de código aberto, sem edições pagas e sem limites de tamanho de banco, de memória ou de processadores;',
       'integridade dos dados: oferece transações com as propriedades ACID, chaves estrangeiras com ações referenciais (RESTRICT, CASCADE e SET NULL) e restrições CHECK, e permite até que comandos de definição de dados, como CREATE TABLE, façam parte de uma transação;',
@@ -98,7 +98,7 @@ module.exports = ({ resultados, trecho }) => {
     ] },
     { t: 'p', texto: 'O {Q:sgbds} compara o PostgreSQL com outros dois SGBDs considerados pelo grupo.' },
     { t: 'quadro', id: 'sgbds', titulo: 'Comparação entre os SGBDs considerados',
-      cabecalho: ['Critério', 'PostgreSQL 16', 'MySQL 8.0', 'SQL Server Express'],
+      cabecalho: ['Critério', 'PostgreSQL 18', 'MySQL 8.0', 'SQL Server Express'],
       larguras: [3.4, 3.2, 3.2, 3.2],
       linhas: [
         ['Licença', 'Código aberto (PostgreSQL License)', 'Código aberto (GPL) e edições comerciais', 'Proprietária'],
@@ -110,7 +110,7 @@ module.exports = ({ resultados, trecho }) => {
         ['Sistemas operacionais', 'Windows, Linux e macOS', 'Windows, Linux e macOS', 'Windows e Linux'],
       ],
       fonteTexto: 'Fonte: Elaborado pelos autores com base na documentação oficial de cada SGBD (2026).' },
-    { t: 'p', texto: 'Os três atenderiam ao escopo do trabalho. O PostgreSQL foi escolhido por ser totalmente gratuito e aberto, sem edição comercial nem limites de uso, por seguir de perto o padrão SQL e por oferecer todos os recursos de integridade exigidos pelas regras de negócio da concessionária. Os comandos deste trabalho foram executados e validados no PostgreSQL ' + versao + ', com a codificação UTF8, que representa corretamente os acentos da língua portuguesa.' },
+    { t: 'p', texto: 'Os três atenderiam ao escopo do trabalho. O PostgreSQL foi escolhido por ser totalmente gratuito e aberto, sem edição comercial nem limites de uso, por seguir de perto o padrão SQL e por oferecer todos os recursos de integridade exigidos pelas regras de negócio da concessionária. Os comandos deste trabalho foram executados e validados no PostgreSQL ' + versao + ', com a codificação UTF8, que representa corretamente os acentos da língua portuguesa. Os scripts usam apenas recursos disponíveis desde a versão 10 do PostgreSQL, como as colunas de identidade, e por isso funcionam da mesma forma na versão 18, instalada nos computadores do grupo.' },
 
     // ── 4 ────────────────────────────────────────────────────────────
     { t: 'h1', texto: 'Modelagem de dados' },
@@ -245,7 +245,7 @@ module.exports = ({ resultados, trecho }) => {
     { t: 'codigo', titulo: 'Criação da tabela clientes', codigo: trecho('CREATE TABLE clientes', '\n);') },
     { t: 'codigo', titulo: 'Criação da tabela funcionarios', codigo: trecho('CREATE TABLE funcionarios', '\n);') },
     { t: 'codigo', id: 'tab_vendas', titulo: 'Criação da tabela vendas', codigo: trecho('CREATE TABLE vendas', '\n);') },
-    { t: 'p', texto: 'Para conferir a estrutura criada, o catálogo do próprio SGBD (a tabela de sistema `pg_constraint`) foi consultado com o {C:cod_restricoes}. O resultado, no {Q:restricoes}, mostra as 18 restrições criadas nas cinco tabelas: 5 chaves primárias, 4 restrições UNIQUE, 5 restrições CHECK e 4 chaves estrangeiras. As chaves primárias, que não foram declaradas com nome, receberam do PostgreSQL nomes no formato tabela_pkey.' },
+    { t: 'p', texto: 'Para conferir a estrutura criada, o catálogo do próprio SGBD (a tabela de sistema `pg_constraint`) foi consultado com o {C:cod_restricoes}. O resultado, no {Q:restricoes}, mostra as 18 restrições criadas nas cinco tabelas: 5 chaves primárias, 4 restrições UNIQUE, 5 restrições CHECK e 4 chaves estrangeiras. As chaves primárias, que não foram declaradas com nome, receberam do PostgreSQL nomes no formato tabela_pkey. O filtro por `contype` mantém o resultado igual em todas as versões: a partir do PostgreSQL 18, as restrições NOT NULL também passaram a ser registradas no `pg_constraint`, com o tipo \'n\', e ficariam de fora da contagem acima.' },
     { t: 'codigo', id: 'cod_restricoes', titulo: 'Consulta às restrições criadas no banco', codigo: [
       'SELECT conrelid::regclass AS tabela,',
       '       conname AS restricao,',
@@ -255,6 +255,7 @@ module.exports = ({ resultados, trecho }) => {
       "                    WHEN 'f' THEN 'FOREIGN KEY' END AS tipo",
       'FROM pg_constraint',
       "WHERE connamespace = 'public'::regnamespace",
+      "  AND contype IN ('p', 'u', 'c', 'f')",
       'ORDER BY conrelid::regclass::text, tipo, conname;',
     ].join('\n') },
     { t: 'quadro', id: 'restricoes', titulo: 'Restrições criadas no banco concessionaria_db',
@@ -352,7 +353,7 @@ module.exports = ({ resultados, trecho }) => {
 
     // ── 6 ────────────────────────────────────────────────────────────
     { t: 'h1', texto: 'Conclusão' },
-    { t: 'p', texto: 'O trabalho cumpriu as quatro etapas propostas: o SGBD PostgreSQL 16 foi definido e justificado, o banco `concessionaria_db` foi criado, a estrutura de cinco tabelas foi implementada com chaves e restrições de integridade e a carga de dados foi realizada com os comandos INSERT, UPDATE e DELETE, todos documentados e executados com sucesso.' },
+    { t: 'p', texto: 'O trabalho cumpriu as quatro etapas propostas: o SGBD PostgreSQL 18 foi definido e justificado, o banco `concessionaria_db` foi criado, a estrutura de cinco tabelas foi implementada com chaves e restrições de integridade e a carga de dados foi realizada com os comandos INSERT, UPDATE e DELETE, todos documentados e executados com sucesso.' },
     { t: 'p', texto: 'A modelagem em dois níveis mostrou-se importante para a implementação. O MER permitiu discutir as regras do negócio sem se preocupar com detalhes técnicos, e o DER, junto com o dicionário de dados, serviu de roteiro direto para os comandos CREATE TABLE. Decisões tomadas na modelagem, como a restrição UNIQUE na chave estrangeira `veiculo_id` e a ação RESTRICT nas exclusões, foram confirmadas nos testes de integridade: o próprio SGBD recusou a venda repetida de um veículo e a exclusão de um cliente com histórico de compras.' },
     { t: 'p', texto: 'Também ficou evidente o valor das transações: ao agrupar o registro da venda e a atualização da situação do veículo, o banco nunca fica em um estado intermediário, em que um veículo vendido aparece como disponível.' },
     { t: 'p', texto: 'Como trabalhos futuros, o modelo pode ser ampliado com tabelas de formas de pagamento e financiamento, agendamento de *test drive*, histórico de manutenção e comissões dos vendedores, além de gatilhos (*triggers*) que atualizem automaticamente a situação do veículo e visões (*views*) para relatórios gerenciais. O banco também está pronto para ser utilizado por uma aplicação com interface gráfica, que poderá ser desenvolvida em uma etapa posterior.' },
@@ -366,7 +367,7 @@ module.exports = ({ resultados, trecho }) => {
       'ELMASRI, Ramez; NAVATHE, Shamkant B. **Sistemas de banco de dados**. 7. ed. São Paulo: Pearson Education do Brasil, 2018.',
       'HEUSER, Carlos Alberto. **Projeto de banco de dados**. 6. ed. Porto Alegre: Bookman, 2009.',
       'SILBERSCHATZ, Abraham; KORTH, Henry F.; SUDARSHAN, S. **Sistema de banco de dados**. 6. ed. Rio de Janeiro: Elsevier, 2012.',
-      'THE POSTGRESQL GLOBAL DEVELOPMENT GROUP. **PostgreSQL 16 documentation**. [*S. l.*]: The PostgreSQL Global Development Group, 2026. Disponível em: https://www.postgresql.org/docs/16/. Acesso em: 22 set. 2026.',
+      'THE POSTGRESQL GLOBAL DEVELOPMENT GROUP. **PostgreSQL 18 documentation**. [*S. l.*]: The PostgreSQL Global Development Group, 2026. Disponível em: https://www.postgresql.org/docs/18/. Acesso em: 22 set. 2026.',
     ] },
     { t: 'apendice', titulo: 'APÊNDICE A – SCRIPT DE CRIAÇÃO DO BANCO',
       texto: 'Arquivo `01_criar_banco.sql`, entregue junto com este documento. Deve ser executado conectado ao banco padrão `postgres`.',

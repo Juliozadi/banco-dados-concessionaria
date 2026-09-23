@@ -1,6 +1,6 @@
 -- =============================================================
 -- BANCO DE DADOS DE UMA CONCESSIONÁRIA DE VEÍCULOS
--- SGBD: PostgreSQL 16
+-- SGBD: PostgreSQL 18 (compatível a partir da versão 10)
 --
 -- ARQUIVO 1 DE 2: CRIAÇÃO DO BANCO DE DADOS
 -- Execute conectado ao banco padrão "postgres":
