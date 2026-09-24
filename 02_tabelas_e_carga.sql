@@ -82,6 +82,20 @@ CREATE TABLE vendas (
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- Confere as restrições criadas, consultando o catálogo do PostgreSQL
+-- (o filtro por contype deixa de fora as NOT NULL, que o PostgreSQL 18
+-- também registra no pg_constraint)
+SELECT conrelid::regclass AS tabela,
+       conname AS restricao,
+       CASE contype WHEN 'p' THEN 'PRIMARY KEY'
+                    WHEN 'u' THEN 'UNIQUE'
+                    WHEN 'c' THEN 'CHECK'
+                    WHEN 'f' THEN 'FOREIGN KEY' END AS tipo
+FROM pg_constraint
+WHERE connamespace = 'public'::regnamespace
+  AND contype IN ('p', 'u', 'c', 'f')
+ORDER BY conrelid::regclass::text, tipo, conname;
+
 -- -------------------------------------------------------------
 -- 3) CARGA DE DADOS (DML)
 -- -------------------------------------------------------------

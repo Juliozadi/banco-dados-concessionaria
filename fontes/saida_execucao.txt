@@ -72,6 +72,38 @@ CREATE TABLE vendas (
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
 CREATE TABLE
+SELECT conrelid::regclass AS tabela,
+       conname AS restricao,
+       CASE contype WHEN 'p' THEN 'PRIMARY KEY'
+                    WHEN 'u' THEN 'UNIQUE'
+                    WHEN 'c' THEN 'CHECK'
+                    WHEN 'f' THEN 'FOREIGN KEY' END AS tipo
+FROM pg_constraint
+WHERE connamespace = 'public'::regnamespace
+  AND contype IN ('p', 'u', 'c', 'f')
+ORDER BY conrelid::regclass::text, tipo, conname;
+    tabela    |       restricao        |    tipo     
+--------------+------------------------+-------------
+ clientes     | clientes_pkey          | PRIMARY KEY
+ clientes     | uq_cliente_cpf         | UNIQUE
+ fornecedores | fornecedores_pkey      | PRIMARY KEY
+ fornecedores | uq_fornecedor_cnpj     | UNIQUE
+ funcionarios | ck_funcionario_salario | CHECK
+ funcionarios | funcionarios_pkey      | PRIMARY KEY
+ veiculos     | ck_veiculo_ano         | CHECK
+ veiculos     | ck_veiculo_preco       | CHECK
+ veiculos     | ck_veiculo_status      | CHECK
+ veiculos     | fk_veiculo_fornecedor  | FOREIGN KEY
+ veiculos     | veiculos_pkey          | PRIMARY KEY
+ veiculos     | uq_veiculo_placa       | UNIQUE
+ vendas       | ck_venda_valor         | CHECK
+ vendas       | fk_venda_cliente       | FOREIGN KEY
+ vendas       | fk_venda_funcionario   | FOREIGN KEY
+ vendas       | fk_venda_veiculo       | FOREIGN KEY
+ vendas       | vendas_pkey            | PRIMARY KEY
+ vendas       | uq_venda_veiculo       | UNIQUE
+(18 rows)
+
 INSERT INTO fornecedores (nome, cnpj, telefone) VALUES
     ('Auto Distribuidora Sul',        '12.345.678/0001-90', '(67) 3321-1122'),
     ('Veículos Brasil Ltda',          '98.765.432/0001-10', '(11) 4002-8922'),
