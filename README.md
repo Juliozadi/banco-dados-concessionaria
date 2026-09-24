@@ -8,6 +8,7 @@ orientações do professor Odirley Franco (entrega em 24/09, até as 19 h).
 |---|---|
 | `Documentacao_Concessionaria_ABNT.docx` | **A documentação de entrega**, no padrão ABNT (NBR 14724) |
 | `Documentacao_Concessionaria_ABNT.pdf` | A mesma documentação em PDF, para conferir |
+| `Apresentacao_Concessionaria.pdf` | Os 19 slides da apresentação, em PDF |
 | `01_criar_banco.sql` | Script 1: cria o banco `concessionaria_db` |
 | `02_tabelas_e_carga.sql` | Script 2: cria as tabelas e faz a carga (INSERT, UPDATE, DELETE) |
 | `diagramas/mer.png`, `diagramas/der.png` | MER (conceitual, notação de Chen) e DER (lógico, pé de galinha) |
